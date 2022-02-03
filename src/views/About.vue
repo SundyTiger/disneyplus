@@ -1,5 +1,16 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <Router />
   </div>
 </template>
+
+<script>
+import Router from "../components/router.components.vue";
+export default {
+  components: {
+    Router,
+  },
+};
+</script>
+
+<style></style>
