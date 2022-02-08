@@ -13,7 +13,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "disneyplus" */ "../views/DisneyPlus.vue"),
+      import(/* webpackChunkName: "disneyplus.js" */ "../views/DisneyPlus.vue"),
   },
   {
     path: "/Kids",
@@ -21,7 +21,8 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "kids" */ "../views/Kids.vue"),
+    component: () =>
+      import(/* webpackChunkName: "kids.js" */ "../views/Kids.vue"),
   },
   {
     path: "/in/:id",
@@ -30,8 +31,25 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "diff" */ "../views/About.vue"),
+      import(/* webpackChunkName: "diff.js" */ "../views/About.vue"),
     props: (route) => ({ id: String(route.params.id) }),
+  },
+  {
+    path: "/Admin",
+    name: "AdminLogIn",
+    component: () =>
+      import(/* webpackChunkName: "admin.js" */ "../views/AdminLogIn.vue"),
+  },
+  {
+    path: "/DashBoard",
+    name: "AdminDashBoard",
+    component: () =>
+      import(
+        /* webpackChunkName: "dashboard.js" */ "../views/AdminDashBoard.vue"
+      ),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/:pathMatch(.*)*",
@@ -45,5 +63,9 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+router.beforeEach((to) => {
+  if (to.meta.requiresAuth && !window.user) {
+    return { name: "AdminLogIn" };
+  }
+});
 export default router;
