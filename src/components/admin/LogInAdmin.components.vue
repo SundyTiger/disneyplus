@@ -41,6 +41,7 @@ export default {
           .then((res) => res)
           .catch((err) => err);
         console.log(res);
+        this.$store.commit("TOKEN_ADD", res["data"]["accessToken"]);
         if (res["status"] == 200) {
           window.user = this.email;
           this.$router.push({ name: "AdminDashBoard" });

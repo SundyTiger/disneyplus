@@ -6,7 +6,8 @@ const AdminLogIn = (email, password) => {
     password: password,
   });
 };
-const AddMovies = (data, result) => {};
+const AddMovies = () => {};
 export default {
   AdminLogIn,
+  AddMovies,
 };
