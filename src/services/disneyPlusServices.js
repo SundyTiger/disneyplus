@@ -6,4 +6,5 @@ const disneyServices = axios.create({
     "Content-Type": "application/json",
   },
 });
+
 export default disneyServices;

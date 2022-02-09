@@ -6,7 +6,7 @@ const AdminLogIn = (email, password) => {
     password: password,
   });
 };
-
+const AddMovies = (data, result) => {};
 export default {
   AdminLogIn,
 };
