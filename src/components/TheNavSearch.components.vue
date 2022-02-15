@@ -2,7 +2,7 @@
   <div class="d-flex margin">
     <input
       type="search"
-      class="form-control w-sm-25 border-0 border-bottom rounded-0 bodyclr0"
+      class="form-control w-sm-25 border-0 border-bottom rounded-0 logInInput bodyclr0"
       placeholder="Search"
       id="searchfield"
       name="searchfield"

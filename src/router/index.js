@@ -39,6 +39,16 @@ const routes = [
     name: "AdminLogIn",
     component: () =>
       import(/* webpackChunkName: "admin.js" */ "../views/AdminLogIn.vue"),
+    children: [
+      {
+        path: "/Movies",
+        name: "AddMovies",
+        component: () =>
+          import(
+            /* webpackChunkName: "movies.js" */ "../components/admin/Movies.vue"
+          ),
+      },
+    ],
   },
   {
     path: "/DashBoard",
@@ -50,6 +60,18 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/Subscribe",
+    name: "Subscribe",
+    component: () =>
+      import(/* webpackChunkName: "subscribe.js" */ "../views/Subscribe.vue"),
+  },
+  {
+    path: "/Register",
+    name: "Register",
+    component: () =>
+      import(/* webpackChunkName: "register.js" */ "../views/Register.vue"),
   },
   {
     path: "/:pathMatch(.*)*",

@@ -1,5 +1,7 @@
 <template>
-  <button type="button" class="ms-2 btn btn-primary">Subscribe</button>
+  <router-link :to="{ name: 'Subscribe' }" class="ms-2 btn btn-primary"
+    >Subscribe</router-link
+  >
 </template>
 
 <script>

@@ -3,7 +3,7 @@
     <Block
       :class="imgSrc.class"
       :imgSrcs="imgSrc.imgSrcs"
-      v-for="(imgSrc, i) in imgSrcs"
+      v-for="(imgSrc, i) in imgData"
       :key="i"
       :iwidth="iwidth"
       :iheight="iheight"
@@ -17,6 +17,9 @@ export default {
   name: "Inner",
   components: {
     Block,
+  },
+  props: {
+    imgData: Array,
   },
   data() {
     return {

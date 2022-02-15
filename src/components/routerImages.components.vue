@@ -1,5 +1,9 @@
 <template>
-  <div class="col-2 my-2" v-for="(imgSrc, i) in imgSrcs" :key="i">
+  <div
+    class="col-xl-2 col-lg-3 col-md-4 col-sm-6 my-2"
+    v-for="(imgSrc, i) in imgSrcs"
+    :key="i"
+  >
     <img
       class="d-block rounded-3"
       :src="imgSrc.src"

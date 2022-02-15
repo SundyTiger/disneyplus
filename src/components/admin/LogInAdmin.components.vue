@@ -39,14 +39,13 @@ export default {
       try {
         const res = await Admin.AdminLogIn(this.email, this.password)
           .then((res) => res)
-          .catch((err) => err);
+          .catch((err) => (this.error = err.response.data.message));
         console.log(res);
-        this.$store.commit("TOKEN_ADD", res["data"]["accessToken"]);
+        localStorage.removeItem("token");
+        localStorage.setItem("token", res["data"]["accessToken"]);
         if (res["status"] == 200) {
           window.user = this.email;
           this.$router.push({ name: "AdminDashBoard" });
-        } else {
-          this.error = "401 UnAuthorised User";
         }
         return res;
       } catch (e) {

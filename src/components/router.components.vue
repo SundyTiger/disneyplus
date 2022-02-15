@@ -62,7 +62,7 @@ export default {
             alt: "Shiddat",
           },
           {
-            src: "https://img1.hotstarext.com/image/upload/f_auto,t_web_vl_1_5x/sources/r1/cms/prod/5472/1055472-v-4fac4c4e1978",
+            src: "https://img1.hotstarext.com/image/uploa0d/f_auto,t_web_vl_1_5x/sources/r1/cms/prod/5472/1055472-v-4fac4c4e1978",
             alt: "Dance+",
           },
           {

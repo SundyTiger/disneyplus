@@ -2,8 +2,8 @@
   <div class="ps-3" v-for="(imgSrc, i) in imgSrcs" :key="i">
     <img
       class="d-block rounded-3"
-      :src="imgSrc.src"
-      :alt="imgSrc.alt"
+      :src="imgSrc.Image"
+      :alt="imgSrc.Name"
       :width="iwidth"
       :height="iheight"
     />

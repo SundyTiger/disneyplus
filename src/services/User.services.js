@@ -13,32 +13,25 @@ const UserRegister = (email, password) => {
   });
 };
 const UserMovies = () => {
-  return disneyplus.get("/movies", {
-    headers: {
-      authorization: `Bearer ${this.$store.state.token}`,
-    },
-  });
+  return disneyplus.get("/movies");
 };
 const UserSeries = () => {
-  return disneyplus.get("/serials", {
-    headers: {
-      authorization: `Bearer ${this.$store.state.token}`,
-    },
-  });
+  return disneyplus.get("serials");
 };
 const UserSeasons = (name) => {
-  return disneyplus.get(`/seasons/${name}`, {
-    headers: {
-      authorization: `Bearer ${this.$store.state.token}`,
-    },
+  return disneyplus.get(`seasons/${name}`);
+};
+const UserForgotPass = (email, password) => {
+  return disneyplus.post("forgetpassword", {
+    email: email,
+    password: password,
   });
 };
-const UserForgotPass = (email,password) => {
-    return disneyplus.post('/forgetpassword', {
-        email: email,
-        password:password
-    })
-}
-exports default {
-    UserLogIn,UserMovies,UserRegister,UserSeries,UserSeasons
-}
+export default {
+  UserLogIn,
+  UserMovies,
+  UserRegister,
+  UserSeries,
+  UserSeasons,
+  UserForgotPass,
+};

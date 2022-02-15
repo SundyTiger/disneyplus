@@ -83,3 +83,8 @@ a .fa:hover {
 .btn-primary .fa:hover {
   background-color: transparent;
 }
+
+.logInInput:focus {
+  background-color: #141b29;
+  border: none !important;
+}

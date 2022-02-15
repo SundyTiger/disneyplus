@@ -5,7 +5,7 @@
     >
     <div>
       <div :id="sId" class="carousel slide" data-bs-ride="carousel">
-        <Inner />
+        <Inner :imgData="imgData" />
         <NextControl :nhref="shref(sId)" />
         <PrevControl :phref="shref(sId)" />
       </div>
@@ -23,6 +23,7 @@ export default {
   props: {
     name: String,
     sId: String,
+    imgData: Array,
   },
   components: {
     NextControl,
