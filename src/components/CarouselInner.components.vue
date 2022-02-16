@@ -1,20 +1,24 @@
 <template>
   <div :class="carClass(index)">
-    <div class="d-flex">
+    <div>
       <div class="card cardclr1 text-white">
-        <div class="card-body">
-          <div class="card-title">{{ data.title }}</div>
-          <div class="card-subtitle">
-            <span>{{ data.channel }}</span>
-            <span>{{ data.lang }}</span>
-            <span>{{ data.cert }}</span>
+        <div class="card-body d-flex">
+          <div>
+            <div class="card-title">{{ data.Name }}</div>
+            <div class="card-subtitle">
+              <span>{{ data.Stream }}</span>
+              <span>{{ data.Language }}</span>
+              <span>{{ data.Certified }}</span>
+            </div>
+            <p class="card-text">
+              {{ data.Description }}
+            </p>
           </div>
-          <p class="card-text">
-            {{ data.Info }}
-          </p>
+          <div>
+            <img :src="data.Image" :alt="data.Title" width="700" height="350" />
+          </div>
         </div>
       </div>
-      <img :src="data.imgSrc" :alt="data.title" />
     </div>
   </div>
 </template>

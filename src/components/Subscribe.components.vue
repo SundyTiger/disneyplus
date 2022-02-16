@@ -1,13 +1,4 @@
 <template>
-  <nav class="d-flex justify-content-between mx-5">
-    <router-link class="navbar-brand ms-2 mb-2" to="/">
-      <img
-        src="https://secure-media.hotstarext.com/web-assets/prod/images/brand-logos/disney-hotstar-logo-dark.svg"
-        alt="Disney+&nbsp;Hotstar"
-      />
-    </router-link>
-    <LogIn />
-  </nav>
   <div class="modal-dialog bodyclr1">
     <div class="modal-content">
       <div class="modal-header bodyclr1">
@@ -134,15 +125,12 @@
 </template>
 
 <script>
-import LogIn from "../components/LogIn.vue";
 import Payments from "../services/Payments.services";
 export default {
   data() {
     return {};
   },
-  components: {
-    LogIn,
-  },
+  components: {},
   methods: {
     loadScript(src) {
       return new Promise((resolve) => {

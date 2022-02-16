@@ -74,6 +74,12 @@ const routes = [
       import(/* webpackChunkName: "register.js" */ "../views/Register.vue"),
   },
   {
+    path: "/Forget",
+    name: "Forget",
+    component: () =>
+      import(/* webpackChunkName: "register.js" */ "../views/Forget.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () =>

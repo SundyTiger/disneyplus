@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <TheNavBar />
     <Carousel />
     <Slider
       name="Latest &#38; Trending"
@@ -30,14 +29,12 @@
   </div>
 </template>
 <script>
-import TheNavBar from "../components/TheNavBar.component.vue";
 import Carousel from "../components/Carousel.components.vue";
 import Slider from "../components/Slider.components.vue";
 import AboutPage from "../components/Aboutpage.components.vue";
 import User from "../services/User.services";
 export default {
   components: {
-    TheNavBar,
     Carousel,
     Slider,
     AboutPage,
@@ -50,10 +47,10 @@ export default {
   },
   async created() {
     this.data = await User.UserMovies().then((res) => res.data.movies);
-    console.log(this.data);
     this.$store.commit("CREATE_ARR", this.data);
     this.imgArray = this.$store.state.imgArray;
     this.$store.commit("NULL_VAL", this.data);
+    this.$store.commit("GLOBAL", this.data);
   },
 };
 </script>

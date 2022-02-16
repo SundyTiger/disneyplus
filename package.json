@@ -12,9 +12,13 @@
     "core-js": "^3.21.0",
     "jquery": "^3.6.0",
     "razorpay": "^2.8.0",
+    "vee-validate": "^4.5.8",
     "vue": "^3.2.29",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.1.0",
+    "vuex-router-sync": "^5.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

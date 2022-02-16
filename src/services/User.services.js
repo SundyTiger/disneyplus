@@ -6,25 +6,32 @@ const UserLogIn = (email, password) => {
     password: password,
   });
 };
-const UserRegister = (email, password) => {
+const UserRegister = (email, password, otp) => {
   return disneyplus.post("/register", {
     email: email,
     password: password,
+    otp: otp,
+  });
+};
+const OtpSend = (email) => {
+  return disneyplus.post("/otp", {
+    email: email,
   });
 };
 const UserMovies = () => {
   return disneyplus.get("/movies");
 };
 const UserSeries = () => {
-  return disneyplus.get("serials");
+  return disneyplus.get("/serials");
 };
 const UserSeasons = (name) => {
-  return disneyplus.get(`seasons/${name}`);
+  return disneyplus.get(`/seasons/${name}`);
 };
-const UserForgotPass = (email, password) => {
-  return disneyplus.post("forgetpassword", {
+const UserForgotPass = (email, password, otp) => {
+  return disneyplus.post("/forgetpassword", {
     email: email,
     password: password,
+    otp: otp,
   });
 };
 export default {
@@ -34,4 +41,5 @@ export default {
   UserSeries,
   UserSeasons,
   UserForgotPass,
+  OtpSend,
 };

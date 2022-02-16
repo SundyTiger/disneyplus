@@ -1,5 +1,4 @@
 <template>
-  <NavBar />
   <div class="row mx-3">
     <h5 class="text-start text-white">{{ routesName }}</h5>
     <Images :imgSrcs="findRoutes()" iheight="120" iwidth="210" />
@@ -8,12 +7,11 @@
 </template>
 
 <script>
-import NavBar from "./TheNavBar.component.vue";
 import Footer from "./Aboutpage.components.vue";
 import Images from "./routerImages.components.vue";
+import User from "../services/User.services";
 export default {
   components: {
-    NavBar,
     Footer,
     Images,
   },
@@ -21,6 +19,7 @@ export default {
     return {
       destination: [],
       routesName: this.$route.params.id,
+      data: [],
       imgSrcs: {
         "HotStar Specials": [
           {
@@ -163,6 +162,7 @@ export default {
   },
   methods: {
     findRoutes() {
+      console.log(this.data);
       for (let key in this.imgSrcs) {
         if (key === this.routesName) {
           this.destination = this.imgSrcs[key];
@@ -171,6 +171,19 @@ export default {
         }
       }
     },
+    findStream(name) {
+      this.data.find((stream) => {
+        if (stream["Stream"] == name) {
+          console.log(stream);
+        }
+      });
+    },
+  },
+  async created() {
+    this.data = await User.UserMovies()
+      .then((res) => res.data.movies)
+      .catch((e) => e);
+    this.findStream();
   },
 };
 </script>

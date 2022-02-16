@@ -6,10 +6,39 @@
           class="btn text-white border-0"
           data-bs-toggle="modal"
           data-bs-target="#modal1"
-          v-if="logShow == false"
+          v-if="!$store.state.isUser"
           >LOGIN</a
         >
-        <img src="../assets/User.svg" alt="icon" v-else />
+        <div class="dropdown" v-if="$store.state.isUser">
+          <a
+            class="dropdown-toggle"
+            id="logInDrop"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img src="../assets/User.svg" alt="icon"
+          /></a>
+          <ul class="dropdown-menu bodyclr1 pe-3" aria-labelledby="logInDrop">
+            <li>
+              <router-link class="dropdown-item text-white hoverclr1" to="/"
+                >WatchList</router-link
+              >
+            </li>
+            <li>
+              <router-link class="dropdown-item text-white hoverclr1" to="/"
+                >My Account</router-link
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item text-white hoverclr1"
+                @click="logOut()"
+                to="/"
+                >LogOut</a
+              >
+            </li>
+          </ul>
+        </div>
         <div class="modal" id="modal1">
           <div class="modal-dialog" style="margin-top: 7vw">
             <div class="modal-content">
@@ -27,18 +56,16 @@
                     class="btn text-center text-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#modal2"
-                    >Have a Email Account</a
+                    >Have An Account</a
                   >
                 </div>
                 <div class="text-center">or</div>
-                <div class="ms-5 me-5 d-flex mt-3" style="margin-bottom: 5vw">
-                  <label class="mt-1 border-bottom border-primary">+91|</label>
-                  <input
-                    class="form-control text-white backgroundclr2 border-0 border-bottom rounded-0 border-primary logInInput"
-                    placeholder="Enter your mobile number"
-                    type="text"
-                    pattern="[0-9]*"
-                  />
+                <div data-bs-dismiss="modal">
+                  <router-link
+                    :to="{ name: 'Register' }"
+                    class="link-primary text-decoration-none"
+                    >Register</router-link
+                  >
                 </div>
               </div>
             </div>
@@ -57,7 +84,7 @@
                   <div class="btn btn-close" data-bs-dismiss="modal"></div>
                 </div>
                 <div class="mt-4">
-                  <h5 class="ms-5">Have an Email Account?</h5>
+                  <h5 class="ms-5">Have an Account?</h5>
                   <div class="ms-5 me-5">
                     <input
                       type="email"
@@ -95,7 +122,7 @@
                 </div>
                 <div class="mt-4">
                   <h5 class="ms-5">Log In!</h5>
-                  <form @submit.prevent="logIn()">
+                  <form @submit.prevent="logIn()" autocomplete="false">
                     <div class="ms-5 me-5 mb-4">
                       <input
                         type="email"
@@ -113,9 +140,11 @@
                         v-model.lazy="password"
                       />
                     </div>
-                    <div class="ms-5 mb-5">
-                      <a href="#" class="link-primary text-decoration-none"
-                        >Forgot?</a
+                    <div class="ms-5 mb-5" data-bs-dismiss="modal">
+                      <router-link
+                        :to="{ name: 'Forget' }"
+                        class="link-primary text-decoration-none"
+                        >Forgot?</router-link
                       >
                     </div>
                     <div class="ms-5 mt-4 me-4 mb-5">
@@ -148,7 +177,6 @@ export default {
       password: "",
       res: {},
       error: "",
-      logShow: false,
     };
   },
   components: {},
@@ -156,14 +184,21 @@ export default {
     async logIn() {
       await User.UserLogIn(this.email, this.password)
         .then((res) => {
-          console.log(res);
-          localStorage.setItem("user_token", res.data.accessToken);
-          this.logShow = true;
+          this.$store.dispatch("setToken", res.data.accessToken);
+          this.$store.dispatch("setUser", res.data.user);
         })
         .catch((err) => (this.error = err.response.data.message));
+    },
+    logOut() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.dropdown-menu {
+  min-width: 4vw;
+}
+</style>

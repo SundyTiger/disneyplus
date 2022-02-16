@@ -2,9 +2,9 @@
   <div class="row mb-2">
     <div class="col-10 m-auto">
       <div id="slider1" class="carousel slide" data-bs-ride="carousel">
-        <Indicators />
+        <Indicators :data="data" />
         <div class="carousel-inner" role="listbox">
-          <Inner :data="x" :index="i" v-for="(x, i) in carData" :key="i" />
+          <Inner :data="x" :index="i" v-for="(x, i) in data" :key="i" />
         </div>
         <PrevControl phref="#slider1" />
         <NextControl nhref="#slider1" />
@@ -18,6 +18,7 @@ import Indicators from "../components/CarouselIndicator.components.vue";
 import Inner from "../components/CarouselInner.components.vue";
 import NextControl from "../components/CarouselNext.components.vue";
 import PrevControl from "../components/CarouselPrev.components.vue";
+import User from "../services/User.services";
 export default {
   name: "Carousel",
   components: {
@@ -28,6 +29,7 @@ export default {
   },
   data() {
     return {
+      data: [],
       carData: [
         {
           title: "IshqBaaz",
@@ -67,6 +69,12 @@ export default {
         },
       ],
     };
+  },
+  async created() {
+    this.data = await User.UserMovies()
+      .then((res) => res.data.movies)
+      .catch((e) => e);
+    console.log(this.data);
   },
 };
 </script>

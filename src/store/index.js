@@ -1,11 +1,16 @@
 import { createStore } from "vuex";
-
+import createPersistedState from "vuex-persistedstate";
 export default createStore({
+  plugins: [createPersistedState()],
   state: {
     token: localStorage.getItem("token"),
+    user_token: null,
+    user: null,
+    isUser: false,
     imgData: [],
     imgObj: {},
     imgArray: [],
+    global: [],
     logShow: false,
   },
   mutations: {
@@ -38,9 +43,30 @@ export default createStore({
       return state.imgArray;
     },
     SHOW(state) {
-      state.logShow = true;
+      !state.logShow;
+    },
+    GLOBAL(state, value) {
+      state.global = value;
+    },
+    setToken(state, token) {
+      state.user_token = token;
+      if (token) {
+        state.isUser = true;
+      } else {
+        state.isUser = false;
+      }
+    },
+    setUser(state, user) {
+      state.user = user;
     },
   },
-  actions: {},
+  actions: {
+    setToken({ commit }, token) {
+      commit("setToken", token);
+    },
+    setUser({ commit }, user) {
+      commit("setUser", user);
+    },
+  },
   modules: {},
 });
