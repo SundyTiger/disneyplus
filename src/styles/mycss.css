@@ -11,7 +11,7 @@ body {
   }
 }
 .searchIcon {
-  background: url("./../icon/search.svg") no-repeat right;
+  background: url("../assets/search.svg") no-repeat right;
   background-size: 15px;
 }
 .line {

@@ -16,6 +16,9 @@ export default {
   props: {
     data: Array,
   },
+  async created() {
+    console.log(this.data);
+  },
 };
 </script>
 

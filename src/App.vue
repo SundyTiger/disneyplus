@@ -1,8 +1,12 @@
 <template>
-  <div id="nav">
-    <NavBar />
+  <div id="app">
+    <div id="nav">
+      <NavBar />
+    </div>
+    <div>
+      <router-view :key="$route.path"></router-view>
+    </div>
   </div>
-  <router-view :key="$route.path" />
 </template>
 <script>
 import NavBar from "./components/TheNavBar.component.vue";
@@ -20,7 +24,6 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 #nav {
   padding: 30px;
 }

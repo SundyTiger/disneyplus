@@ -34,6 +34,9 @@ const UserForgotPass = (email, password, otp) => {
     otp: otp,
   });
 };
+const filterMovie = (data) =>{
+  return disneyplus.post("/movies/filter",data)
+}
 export default {
   UserLogIn,
   UserMovies,
@@ -42,4 +45,5 @@ export default {
   UserSeasons,
   UserForgotPass,
   OtpSend,
+  filterMovie
 };

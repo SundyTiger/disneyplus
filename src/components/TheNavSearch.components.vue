@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex margin">
+  <div class="d-flex">
     <input
       type="search"
-      class="form-control w-sm-25 border-0 border-bottom rounded-0 logInInput bodyclr0"
+      class="form-control w-100 border-0 border-bottom rounded-0 logInInput bodyclr0 text-white"
       placeholder="Search"
       id="searchfield"
       name="searchfield"
@@ -22,5 +22,11 @@ export default {
 <style scoped>
 .margin {
   margin-left: 30vw;
+}
+.form-control {
+  transition: transform 400ms;
+}
+.form-control :focus {
+  padding-left: -100px;
 }
 </style>

@@ -12,6 +12,7 @@ export default createStore({
     imgArray: [],
     global: [],
     logShow: false,
+    imgSrcs: [],
   },
   mutations: {
     TOKEN_ADD(state, value) {
@@ -22,31 +23,31 @@ export default createStore({
       state.imgArray = [];
       state.imgObj = {};
     },
-    CREATE_ARR(state, data) {
-      for (let x in data) {
-        if (state.imgArray.length == 0) {
-          state.imgObj["class"] = "carousel-item active";
-        } else {
-          state.imgObj["class"] = "carousel-item";
-        }
-        if (state.imgData.length == 8) {
-          state.imgObj["imgSrcs"] = state.imgData;
-          state.imgArray.push(state.imgObj);
-          state.imgData = [];
-          state.imgObj = {};
-        } else {
-          state.imgData.push(data[x]);
-        }
-      }
-      state.imgObj["imgSrcs"] = state.imgData;
-      state.imgArray.push(state.imgObj);
-      return state.imgArray;
-    },
+    // CREATE_ARR(state, data) {
+    //   for (let x in data) {
+    //     if (state.imgArray.length == 0) {
+    //       state.imgObj["class"] = "carousel-item active";
+    //     } else {
+    //       state.imgObj["class"] = "carousel-item";
+    //     }
+    //     if (state.imgData.length == 8) {
+    //       state.imgObj["imgSrcs"] = state.imgData;
+    //       state.imgArray.push(state.imgObj);
+    //       state.imgData = [];
+    //       state.imgObj = {};
+    //     } else {
+    //       state.imgData.push(data[x]);
+    //     }
+    //   }
+    //   state.imgObj["imgSrcs"] = state.imgData;
+    //   state.imgArray.push(state.imgObj);
+    //   return state.imgArray;
+    // },
     SHOW(state) {
       !state.logShow;
     },
     GLOBAL(state, value) {
-      state.global = value;
+      state.global.push(value);
     },
     setToken(state, token) {
       state.user_token = token;
@@ -59,6 +60,9 @@ export default createStore({
     setUser(state, user) {
       state.user = user;
     },
+    SET_IMGSRCS(state, value) {
+      state.imgSrcs = value;
+    },
   },
   actions: {
     setToken({ commit }, token) {
@@ -66,6 +70,12 @@ export default createStore({
     },
     setUser({ commit }, user) {
       commit("setUser", user);
+    },
+    global({ commit }, value) {
+      commit("GLOBAL", value);
+    },
+    setImgSrcs({ commit }, value) {
+      commit("SET_IMGSRCS", value);
     },
   },
   modules: {},

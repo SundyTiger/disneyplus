@@ -1,5 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Router from "../components/router.components.vue";
+import DisneyPlus from "../views/DisneyPlus.vue";
+import Kids from "../views/Kids.vue";
+import AdminLogIn from "../views/AdminLogIn.vue";
+import AdminDashBoard from "../views/AdminDashBoard.vue";
+import Subscribe from "../views/Subscribe.vue";
+import Register from "../views/Register.vue";
+import Forget from "../views/Forget.vue";
+import Details from "../components/Details.components.vue";
+import navRoutes from "./navRoutes.json";
+import VideoPlay from "../components/VideoPlay.components.vue";
+import User from "../services/User.services";
 const routes = [
   {
     path: "/",
@@ -12,8 +24,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "disneyplus.js" */ "../views/DisneyPlus.vue"),
+    component: DisneyPlus,
   },
   {
     path: "/Kids",
@@ -21,42 +32,17 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "kids.js" */ "../views/Kids.vue"),
-  },
-  {
-    path: "/in/:id",
-    name: "Filter",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "diff.js" */ "../views/About.vue"),
-    props: (route) => ({ id: String(route.params.id) }),
+    component: Kids,
   },
   {
     path: "/Admin",
     name: "AdminLogIn",
-    component: () =>
-      import(/* webpackChunkName: "admin.js" */ "../views/AdminLogIn.vue"),
-    children: [
-      {
-        path: "/Movies",
-        name: "AddMovies",
-        component: () =>
-          import(
-            /* webpackChunkName: "movies.js" */ "../components/admin/Movies.vue"
-          ),
-      },
-    ],
+    component: AdminLogIn,
   },
   {
     path: "/DashBoard",
     name: "AdminDashBoard",
-    component: () =>
-      import(
-        /* webpackChunkName: "dashboard.js" */ "../views/AdminDashBoard.vue"
-      ),
+    component: AdminDashBoard,
     meta: {
       requiresAuth: true,
     },
@@ -64,20 +50,48 @@ const routes = [
   {
     path: "/Subscribe",
     name: "Subscribe",
-    component: () =>
-      import(/* webpackChunkName: "subscribe.js" */ "../views/Subscribe.vue"),
+    component: Subscribe,
   },
   {
     path: "/Register",
     name: "Register",
-    component: () =>
-      import(/* webpackChunkName: "register.js" */ "../views/Register.vue"),
+    component: Register,
   },
   {
     path: "/Forget",
     name: "Forget",
-    component: () =>
-      import(/* webpackChunkName: "register.js" */ "../views/Forget.vue"),
+    component: Forget,
+  },
+  {
+    path: "/in/:id",
+    name: "Filter",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: Router,
+    props: true,
+    beforeEnter(to) {
+      const exists = navRoutes.navRoutes.find((data) => data == to.params.id);
+      if (!exists) return { name: "NotFound" };
+    },
+  },
+  {
+    path: "/in/:id/:title",
+    name: "Details",
+    component: Details,
+    props: true,
+    async beforeEnter(to) {
+      const exists = await User.filterMovie({ Title: to.params.title }).then(
+        (res) => res.data.filterData[0]
+      );
+      if (!exists) return { name: "NotFound" };
+    },
+  },
+  {
+    path: "/in/:id/:title/play/:name",
+    name: "VideoPlay",
+    component: VideoPlay,
+    props: true,
   },
   {
     path: "/:pathMatch(.*)*",
@@ -86,7 +100,6 @@ const routes = [
       import(/* webpackChunkName: "notfound" */ "../views/NotFound.vue"),
   },
 ];
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
@@ -96,4 +109,5 @@ router.beforeEach((to) => {
     return { name: "AdminLogIn" };
   }
 });
+
 export default router;

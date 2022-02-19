@@ -1,29 +1,33 @@
 <template>
   <div class="container-fluid">
-    <Carousel />
+    <Carousel :carArray="carArray" />
     <Slider
       name="Latest &#38; Trending"
       sId="Slider2"
-      :Data="data"
-      :imgData="imgArray"
+      iwidth="150"
+      iheight="200"
+      :imgData="CREATE_ARR(carArray)"
     />
     <Slider
       name="Popular Shows"
       sId="Slider3"
-      :Data="data"
-      :imgData="imgArray"
+      iwidth="150"
+      iheight="200"
+      :imgData="CREATE_ARR(imgArray)"
     />
     <Slider
       name="Popular Series"
       sId="Slider4"
-      :Data="data"
-      :imgData="imgArray"
+      iwidth="150"
+      iheight="200"
+      :imgData="CREATE_ARR(carArray)"
     />
     <Slider
       name="Popular Anime"
       sId="Slider5"
-      :Data="data"
-      :imgData="imgArray"
+      iwidth="150"
+      iheight="200"
+      :imgData="CREATE_ARR(imgArray)"
     />
     <AboutPage />
   </div>
@@ -43,14 +47,40 @@ export default {
     return {
       data: [],
       imgArray: [],
+      latestArray: [],
+      carArray: [],
     };
   },
+  methods: {
+    CREATE_ARR(data) {
+      let imgArray = [];
+      let imgData = [];
+      let imgObj = {};
+      for (let x in data) {
+        if (imgArray.length == 0) {
+          imgObj["class"] = "carousel-item active";
+        } else {
+          imgObj["class"] = "carousel-item";
+        }
+        if (imgData.length == 8) {
+          imgObj["imgSrcs"] = imgData;
+          imgArray.push(imgObj);
+          imgData = [];
+          imgObj = {};
+        } else {
+          imgData.push(data[x]);
+        }
+      }
+      imgObj["imgSrcs"] = imgData;
+      imgArray.push(imgObj);
+      return imgArray;
+    },
+  },
   async created() {
-    this.data = await User.UserMovies().then((res) => res.data.movies);
-    this.$store.commit("CREATE_ARR", this.data);
-    this.imgArray = this.$store.state.imgArray;
-    this.$store.commit("NULL_VAL", this.data);
-    this.$store.commit("GLOBAL", this.data);
+    this.imgArray = await User.UserMovies().then((res) => res.data.movies);
+    this.carArray = await User.filterMovie({ Year: "2021" })
+      .then((res) => res.data.filterData)
+      .catch((e) => e);
   },
 };
 </script>

@@ -1,12 +1,6 @@
 <template>
-  <a
-    class="carousel-control-next"
-    :href="nhref"
-    role="button"
-    data-bs-slide="next"
-  >
+  <a class="carousel-control-" :href="nhref" role="button" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
   </a>
 </template>
 
@@ -19,4 +13,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.marpad {
+  margin: -15;
+}
+</style>

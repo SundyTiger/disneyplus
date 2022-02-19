@@ -41,6 +41,8 @@
         bstyle="font-family: 'Mochiy Pop P One', sans-serif;"
         bclass="nav-link text-warning fw-bold"
       />
+    </ul>
+    <ul class="d-flex mb-2 mb-lg-0">
       <Search />
       <NavButton />
       <LogIn />
@@ -65,14 +67,14 @@ export default {
     return {
       logShow: false,
       TVArray: [
-        "HotStar Specials",
+        "HotStarSpecials",
         "Quix",
-        "Star Jalsha",
-        "Star Plus",
-        "Star Vijay",
-        "Star Bharat",
+        "StarJalsha",
+        "StarPlus",
+        "StarVijay",
+        "StarBharat",
         "Asianet",
-        "Star Maa",
+        "StarMaa",
         "more..",
       ],
       MovieArray: [
@@ -92,10 +94,10 @@ export default {
         "Formula 1",
         "Kabbadi",
         "Tennis",
-        "American Football",
+        "AmericanFootball",
         "eSports",
-        "Formula E",
-        "Martial Arts",
+        "FormulaE",
+        "MartialArts",
         "Hockey",
         "Athletics",
         "Golf",

@@ -18,6 +18,7 @@ export default {
     navDrop: Array,
     dId: String,
     istyle: String,
+    name: String,
   },
 };
 </script>
