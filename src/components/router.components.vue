@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       Srcs: [],
+      data: [],
     };
   },
   methods: {},
@@ -28,8 +29,15 @@ export default {
     this.Srcs = await User.filterMovie({ Language: this.id })
       .then((res) => res.data.filterData)
       .catch((e) => e);
-    console.log(this.Srcs);
     this.$store.dispatch("setImgSrcs", this.Srcs);
+    if (this.id == "WatchList") {
+      console.log(this.$store.state.watchlist);
+      for (let x of this.$store.state.watchlist) {
+        await User.filterMovie({ Title: x })
+          .then((res) => this.Srcs.push(res.data.filterData[0]))
+          .catch((e) => e);
+      }
+    }
   },
 };
 </script>

@@ -20,7 +20,9 @@
           /></a>
           <ul class="dropdown-menu bodyclr1 pe-3" aria-labelledby="logInDrop">
             <li>
-              <router-link class="dropdown-item text-white hoverclr1" to="/"
+              <router-link
+                class="dropdown-item text-white hoverclr1"
+                :to="{ name: 'Filter', params: { id: 'WatchList' } }"
                 >WatchList</router-link
               >
             </li>
@@ -59,11 +61,14 @@
                     >Have An Account</a
                   >
                 </div>
-                <div class="text-center">or</div>
-                <div data-bs-dismiss="modal">
+                <div class="text-center my-2">or</div>
+                <div
+                  class="ms-5 me-5 mt-4 mx-auto border rounded-2 py-3 border-primary backgroundclr1 mb-2"
+                  data-bs-dismiss="modal"
+                >
                   <router-link
                     :to="{ name: 'Register' }"
-                    class="link-primary text-decoration-none"
+                    class="btn text-center text-primary text-decoration-none"
                     >Register</router-link
                   >
                 </div>
@@ -90,15 +95,19 @@
                       type="email"
                       class="form-control backgroundclr2 border-0 border-bottom rounded-0 border-primary logInInput text-white"
                       placeholder="Enter your email"
-                      v-model.lazy="email"
+                      v-model="email"
                     />
                   </div>
+                  <span class="text-danger">{{ emailError }}</span>
                   <div class="ms-5 mt-4 me-4">
                     <button
                       type="submit"
                       class="btn btn-primary text-white pt-0 ps-4"
                       data-bs-toggle="modal"
                       data-bs-target="#modal3"
+                      :disabled="
+                        emailError ? true : false || email ? false : true
+                      "
                     >
                       CONTINUE <i class="fa fa-angle-right"></i>
                     </button>
@@ -132,6 +141,7 @@
                         readonly
                       />
                     </div>
+                    <span class="text-danger">{{ emailError }}</span>
                     <div class="ms-5 me-5 mb-3">
                       <input
                         type="password"
@@ -140,10 +150,11 @@
                         v-model.lazy="password"
                       />
                     </div>
-                    <div class="ms-5 mb-5" data-bs-dismiss="modal">
+                    <span class="text-danger">{{ passError }}</span>
+                    <div class="ms-3 mb-5" data-bs-dismiss="modal">
                       <router-link
                         :to="{ name: 'Forget' }"
-                        class="link-primary text-decoration-none"
+                        class="text-primary text-decoration-none"
                         >Forgot?</router-link
                       >
                     </div>
@@ -170,13 +181,33 @@
 
 <script>
 import User from "../services/User.services";
+import { useField, useForm } from "vee-validate";
+import * as yup from "yup";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
       res: {},
       error: "",
+    };
+  },
+  setup() {
+    const validation = yup.object({
+      email: yup.string().email().lowercase().required(),
+      password: yup.string().min(8).required(),
+    });
+    useForm({
+      validationSchema: validation,
+    });
+    const { value: email, errorMessage: emailError } = useField("email");
+    const { value: password, errorMessage: passError } = useField("password");
+    const { resetForm, handleSubmit } = useForm();
+    return {
+      email,
+      password,
+      emailError,
+      passError,
+      resetForm,
+      handleSubmit,
     };
   },
   components: {},
@@ -186,12 +217,17 @@ export default {
         .then((res) => {
           this.$store.dispatch("setToken", res.data.accessToken);
           this.$store.dispatch("setUser", res.data.user);
+          this.$store.dispatch("setWatchList", res.data.user.WatchList);
         })
-        .catch((err) => (this.error = err.response.data.message));
+        .catch((err) => (this.error = err.res.message));
+      this.$router.go(-1);
+      this.resetForm();
     },
     logOut() {
       this.$store.dispatch("setToken", null);
       this.$store.dispatch("setUser", null);
+      this.$store.dispatch("setWatchList", []);
+      this.$router.go(-1);
     },
   },
 };

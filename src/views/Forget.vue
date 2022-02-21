@@ -2,8 +2,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body bodyclr1">
-        <h3>User Registeration</h3>
-        <form @submit.prevent="Forget()">
+        <h3 class="text-white-50">Forget PassWord</h3>
+        <form @submit.prevent="Forget()" autocomplete="false">
           <div class="ms-5 me-5 mb-4 d-flex">
             <input
               type="email"
@@ -44,14 +44,25 @@
               type="password"
               class="form-control backgroundclr2 border-0 border-bottom logInInput rounded-0 border-primary text-white"
               placeholder="Re-Enter Password"
-              v-model.lazy="confirm_password"
+              v-model="confirm_password"
             />
             <small v-if="err" class="text-danger">{{ err }}</small>
           </div>
-          <div class="ms-5 mt-4 me-4 mb-5">
-            <button type="submit" class="btn btn-primary text-white">
-              Register
-            </button>
+          <div class="d-flex ms-5">
+            <div class="mt-4 me-4 mb-5">
+              <button
+                type="reset"
+                @click="resetData()"
+                class="btn btn-danger text-white"
+              >
+                Reset
+              </button>
+            </div>
+            <div class="mt-4 me-4 mb-5">
+              <button type="submit" class="btn btn-primary text-white">
+                Change PassWord
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -83,6 +94,7 @@ export default {
     const { value: email, errorMessage: emailError } = useField("email");
     const { value: password, errorMessage: passError } = useField("password");
     const { value: otp, errorMessage: otpError } = useField("otp");
+    const { resetForm, handleSubmit } = useForm();
     return {
       email,
       password,
@@ -90,6 +102,8 @@ export default {
       emailError,
       passError,
       otpError,
+      resetForm,
+      handleSubmit,
     };
   },
   methods: {
@@ -111,11 +125,18 @@ export default {
           .then((res) => res)
           .catch((e) => (this.err = e));
         if (data.status == 200) {
+          this.resetForm();
           this.$router.push({ name: "Home" });
+        } else {
+          this.err = "Email Id Already Exists";
         }
       } else {
         this.err = "password doesn't match";
       }
+    },
+    async resetData() {
+      this.otpBox = false;
+      this.resetForm();
     },
   },
 };

@@ -6,6 +6,7 @@ export default createStore({
     token: localStorage.getItem("token"),
     user_token: null,
     user: null,
+    watchlist: null,
     isUser: false,
     imgData: [],
     imgObj: {},
@@ -13,6 +14,7 @@ export default createStore({
     global: [],
     logShow: false,
     imgSrcs: [],
+    imgAdd: false,
   },
   mutations: {
     TOKEN_ADD(state, value) {
@@ -23,26 +25,6 @@ export default createStore({
       state.imgArray = [];
       state.imgObj = {};
     },
-    // CREATE_ARR(state, data) {
-    //   for (let x in data) {
-    //     if (state.imgArray.length == 0) {
-    //       state.imgObj["class"] = "carousel-item active";
-    //     } else {
-    //       state.imgObj["class"] = "carousel-item";
-    //     }
-    //     if (state.imgData.length == 8) {
-    //       state.imgObj["imgSrcs"] = state.imgData;
-    //       state.imgArray.push(state.imgObj);
-    //       state.imgData = [];
-    //       state.imgObj = {};
-    //     } else {
-    //       state.imgData.push(data[x]);
-    //     }
-    //   }
-    //   state.imgObj["imgSrcs"] = state.imgData;
-    //   state.imgArray.push(state.imgObj);
-    //   return state.imgArray;
-    // },
     SHOW(state) {
       !state.logShow;
     },
@@ -63,6 +45,12 @@ export default createStore({
     SET_IMGSRCS(state, value) {
       state.imgSrcs = value;
     },
+    SET_IMG_VAL(state, value) {
+      state.imgAdd = value;
+    },
+    SET_WATCHLIST(state, value) {
+      state.watchlist = value;
+    },
   },
   actions: {
     setToken({ commit }, token) {
@@ -76,6 +64,12 @@ export default createStore({
     },
     setImgSrcs({ commit }, value) {
       commit("SET_IMGSRCS", value);
+    },
+    setImgAdd({ commit }, value) {
+      commit("SET_IMG_VAL", value);
+    },
+    setWatchList({ commit }, value) {
+      commit("SET_WATCHLIST", value);
     },
   },
   modules: {},

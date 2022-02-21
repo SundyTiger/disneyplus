@@ -1,6 +1,6 @@
 <template>
   <div :class="Class">
-    <div class="d-flex flex-row">
+    <div class="d-flex ms-5">
       <Image :imgSrcs="imgSrcs" :iwidth="iwidth" :iheight="iheight" />
     </div>
   </div>

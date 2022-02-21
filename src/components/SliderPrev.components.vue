@@ -1,6 +1,6 @@
 <template>
   <a
-    class="carousel-control-prev"
+    class="carousel-control-prev margin"
     :href="phref"
     role="button"
     data-bs-slide="prev"
@@ -19,4 +19,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.margin {
+  margin-left: -10vh;
+}
+</style>

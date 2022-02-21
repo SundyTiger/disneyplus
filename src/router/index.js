@@ -12,6 +12,7 @@ import Details from "../components/Details.components.vue";
 import navRoutes from "./navRoutes.json";
 import VideoPlay from "../components/VideoPlay.components.vue";
 import User from "../services/User.services";
+import store from "../store/index";
 const routes = [
   {
     path: "/",
@@ -56,6 +57,12 @@ const routes = [
     path: "/Register",
     name: "Register",
     component: Register,
+    beforeEach(to, from, next) {
+      const exists = store.state.isUser;
+      if (exists) {
+        return next({ name: "Home" });
+      }
+    },
   },
   {
     path: "/Forget",
@@ -92,6 +99,9 @@ const routes = [
     name: "VideoPlay",
     component: VideoPlay,
     props: true,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/:pathMatch(.*)*",
@@ -104,10 +114,11 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-router.beforeEach((to) => {
-  if (to.meta.requiresAuth && !window.user) {
-    return { name: "AdminLogIn" };
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.state.isUser) {
+    return next({ name: "Home" });
+  } else {
+    return next();
   }
 });
-
 export default router;

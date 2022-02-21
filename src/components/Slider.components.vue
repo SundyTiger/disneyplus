@@ -6,8 +6,8 @@
     <div>
       <div :id="sId" class="carousel slide" data-bs-ride="carousel">
         <Inner :imgData="imgData" :iwidth="iwidth" :iheight="iheight" />
-        <NextControl :nhref="shref(sId)" />
-        <PrevControl :phref="shref(sId)" />
+        <NextControl :nhref="shref(sId)" v-if="show()" />
+        <PrevControl :phref="shref(sId)" v-if="show()" />
       </div>
     </div>
   </div>
@@ -34,12 +34,24 @@ export default {
     SLink,
   },
   data() {
-    return {};
+    return {
+      disArrow: false,
+    };
   },
   methods: {
     shref(sId) {
       return `#${sId}`;
     },
+    show() {
+      if (this.imgData.length === 1) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+  },
+  async created() {
+    await console.log(this.show());
   },
 };
 </script>

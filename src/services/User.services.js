@@ -34,9 +34,21 @@ const UserForgotPass = (email, password, otp) => {
     otp: otp,
   });
 };
-const filterMovie = (data) =>{
-  return disneyplus.post("/movies/filter",data)
-}
+const filterMovie = (data) => {
+  return disneyplus.post("/movies/filter", data);
+};
+const addWatchList = (email, title) => {
+  return disneyplus.post("/watchlist", {
+    email: email,
+    title: title,
+  });
+};
+const removeWatchList = (email, title) => {
+  return disneyplus.put("/watchlist", {
+    email: email,
+    title: title,
+  });
+};
 export default {
   UserLogIn,
   UserMovies,
@@ -45,5 +57,7 @@ export default {
   UserSeasons,
   UserForgotPass,
   OtpSend,
-  filterMovie
+  filterMovie,
+  addWatchList,
+  removeWatchList,
 };

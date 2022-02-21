@@ -57,18 +57,22 @@ export default {
       let imgData = [];
       let imgObj = {};
       for (let x in data) {
-        if (imgArray.length == 0) {
-          imgObj["class"] = "carousel-item active";
+        if (imgArray.length <= 10) {
+          if (imgArray.length == 0) {
+            imgObj["class"] = "carousel-item active";
+          } else {
+            imgObj["class"] = "carousel-item";
+          }
+          if (imgData.length == 7) {
+            imgObj["imgSrcs"] = imgData;
+            imgArray.push(imgObj);
+            imgData = [];
+            imgObj = {};
+          } else {
+            imgData.push(data[x]);
+          }
         } else {
-          imgObj["class"] = "carousel-item";
-        }
-        if (imgData.length == 8) {
-          imgObj["imgSrcs"] = imgData;
-          imgArray.push(imgObj);
-          imgData = [];
-          imgObj = {};
-        } else {
-          imgData.push(data[x]);
+          break;
         }
       }
       imgObj["imgSrcs"] = imgData;
