@@ -26,10 +26,18 @@ export default {
   },
   methods: {},
   async created() {
-    this.Srcs = await User.filterMovie({ Language: this.id })
-      .then((res) => res.data.filterData)
+    await User.filterMovie({ Language: this.id })
+      .then((res) => {
+        this.Srcs = res.data.filterData;
+        this.$store.dispatch("setImgSrcs", this.Srcs);
+      })
       .catch((e) => e);
-    this.$store.dispatch("setImgSrcs", this.Srcs);
+    await User.filterMovie({ Geners: this.id })
+      .then((res) => {
+        this.Srcs = res.data.filterData;
+        this.$store.dispatch("setImgSrcs", this.Srcs);
+      })
+      .catch((e) => e);
     if (this.id == "WatchList") {
       console.log(this.$store.state.watchlist);
       for (let x of this.$store.state.watchlist) {

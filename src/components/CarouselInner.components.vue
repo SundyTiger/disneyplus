@@ -23,7 +23,13 @@
             </p>
           </div>
           <div>
-            <img :src="data.Image" :alt="data.Title" width="700" height="400" />
+            <img
+              class="responsive"
+              :src="data.Image"
+              :alt="data.Title"
+              width="700"
+              height="400"
+            />
           </div>
         </div>
       </div>
@@ -51,4 +57,32 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.responsive {
+  width: 700;
+  max-width: 700px;
+  height: 350;
+}
+@media screen and (max-width: 992px) {
+  .responsive {
+    width: 500;
+    max-width: 500px;
+    height: 150;
+  }
+}
+@media screen and (max-width: 692px) {
+  .responsive {
+    width: 400;
+    max-width: 500px;
+    height: auto;
+  }
+}
+/* On screens that are 600px wide or less, the background color is olive */
+@media screen and (max-width: 600px) {
+  .responsive {
+    width: 200;
+    max-width: 300px;
+    height: auto;
+  }
+}
+</style>

@@ -29,8 +29,8 @@
         bclass="nav-link text-white"
       />
       <Item
-        navItem="Sports"
-        :navDrop="SportsArray"
+        navItem="Geners"
+        :navDrop="GenersArray"
         dId="dropdownmenu4"
         istyle="margin-left: 16vw"
         bclass="nav-link text-white"
@@ -87,21 +87,20 @@ export default {
         "English",
         "Kannada",
       ],
-      SportsArray: [
-        "Cricket",
-        "Football",
-        "Badminton",
-        "Formula 1",
-        "Kabbadi",
-        "Tennis",
-        "AmericanFootball",
-        "eSports",
-        "FormulaE",
-        "MartialArts",
-        "Hockey",
-        "Athletics",
-        "Golf",
-        "Wresling",
+      GenersArray: [
+        "Animation",
+        "Adventure",
+        "Action",
+        "Talk Show",
+        "Comedy",
+        "Romance",
+        "Biopic",
+        "Drama",
+        "Reality",
+        "Documentry",
+        "Horror",
+        "Periodic",
+        "Superhero",
       ],
     };
   },

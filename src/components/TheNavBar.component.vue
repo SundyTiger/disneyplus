@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg text-white mx-5">
+  <nav class="navbar navbar-expand-lg text-white mx-5 bodyclr0">
     <HamBurger />
     <router-link class="navbar-brand ms-2 mb-2" to="/">
       <img

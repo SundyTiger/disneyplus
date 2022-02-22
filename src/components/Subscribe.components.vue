@@ -2,7 +2,7 @@
   <div class="modal-dialog bodyclr1">
     <div class="modal-content">
       <div class="modal-header bodyclr1">
-        <h5 class="modal-title">
+        <h5 class="modal-title text-white-50">
           Subscribe to watch all content on Disney+ Hotstar
         </h5>
       </div>
@@ -11,7 +11,7 @@
           <thead>
             <tr>
               <th scope="col" colspan="3"></th>
-              <th scope="col" class="text-warning">Super</th>
+              <th scope="col" class="text-warning">Free</th>
               <th scope="col">Premium</th>
             </tr>
           </thead>
@@ -19,7 +19,7 @@
             <tr>
               <td colspan="3">
                 All content <br />
-                <small> Movies, live sports, TV, Specials</small>
+                <small> Movies, TV, Specials</small>
               </td>
               <td>
                 <img
@@ -40,7 +40,7 @@
               <td colspan="3">Watch on TV or Laptop</td>
               <td>
                 <img
-                  src="https://secure-media.hotstar.com/static/subscription/paywall_service/comparator/tick/smp/web-1x.png"
+                  src="https://secure-media.hotstar.com/static/subscription/paywall_service/comparator/cross/smp/web-2x.png"
                   width="24px"
                   height="24px"
                 />
@@ -54,7 +54,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="3">Ads free movies and shows (except sports)</td>
+              <td colspan="3">movies and shows</td>
               <td>
                 <img
                   src="https://secure-media.hotstar.com/static/subscription/paywall_service/comparator/cross/smp/web-2x.png"
@@ -70,35 +70,10 @@
                 />
               </td>
             </tr>
-            <tr>
-              <td colspan="3">Number of devices that can be logged in</td>
-              <td>2</td>
-              <td>4</td>
-            </tr>
-            <tr>
-              <td colspan="3">Max video quality</td>
-              <td>Full HD (1080p)</td>
-              <td>4K (2160p)</td>
-            </tr>
-            <tr>
-              <td colspan="3">Max audio quality</td>
-              <td>Dolby 5.1</td>
-              <td>Dolby 5.1</td>
-            </tr>
           </tbody>
         </table>
       </div>
       <div class="modal-footer bodyclr1">
-        <td colspan="3">
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="displayRazorPay(899)"
-          >
-            <p class="text-warning text-start">Super</p>
-            <p>₹899</p>
-          </button>
-        </td>
         <td>
           <button
             type="button"
