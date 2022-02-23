@@ -37,6 +37,9 @@ const UserForgotPass = (email, password, otp) => {
 const filterMovie = (data) => {
   return disneyplus.post("/movies/filter", data);
 };
+const filterData = (data) => {
+  return disneyplus.post("/movies/filterData", data);
+};
 const addWatchList = (email, title) => {
   return disneyplus.post("/watchlist", {
     email: email,
@@ -60,4 +63,5 @@ export default {
   filterMovie,
   addWatchList,
   removeWatchList,
+  filterData,
 };

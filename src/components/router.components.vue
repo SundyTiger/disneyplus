@@ -32,12 +32,14 @@ export default {
         this.$store.dispatch("setImgSrcs", this.Srcs);
       })
       .catch((e) => e);
-    await User.filterMovie({ Geners: this.id })
-      .then((res) => {
-        this.Srcs = res.data.filterData;
-        this.$store.dispatch("setImgSrcs", this.Srcs);
-      })
-      .catch((e) => e);
+    if (this.Srcs.length == 0) {
+      await User.filterMovie({ Geners: this.id })
+        .then((res) => {
+          this.Srcs = res.data.filterData;
+          this.$store.dispatch("setImgSrcs", this.Srcs);
+        })
+        .catch((e) => e);
+    }
     if (this.id == "WatchList") {
       console.log(this.$store.state.watchlist);
       for (let x of this.$store.state.watchlist) {

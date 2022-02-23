@@ -9,22 +9,8 @@
       :imgData="CREATE_ARR(carArray)"
     />
     <Slider
-      name="Popular Shows"
+      name="Popular Movies"
       sId="Slider3"
-      iwidth="150"
-      iheight="200"
-      :imgData="CREATE_ARR(imgArray)"
-    />
-    <Slider
-      name="Popular Series"
-      sId="Slider4"
-      iwidth="150"
-      iheight="200"
-      :imgData="CREATE_ARR(carArray)"
-    />
-    <Slider
-      name="Popular Anime"
-      sId="Slider5"
       iwidth="150"
       iheight="200"
       :imgData="CREATE_ARR(imgArray)"

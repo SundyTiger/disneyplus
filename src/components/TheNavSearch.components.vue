@@ -9,14 +9,24 @@
       v-model="Search"
     />
     <div
-      class="card position-fixed"
+      class="card position-fixed bodyclr1"
       v-if="searchData.length > 0"
       style="width: 18rem"
       aria-labelledby="searchfield"
     >
-      <div class="card-body d-flex" v-for="data in searchData" :key="data._id">
+      <router-link
+        class="card-body d-flex text-decoration-none justify-content-between"
+        v-for="data in searchData"
+        :key="data._id"
+        :to="{
+          name: 'Details',
+          params: { id: data.Language, title: data.Title },
+        }"
+        @click="searChBox()"
+      >
         <p class="card-title text-primary">{{ data.Name }}</p>
-      </div>
+        <img :src="data.Image" width="50" height="50" />
+      </router-link>
     </div>
   </div>
 </template>
@@ -36,10 +46,17 @@ export default {
       return this.Datalist.filter((data) => {
         if (this.Search.length > 1) {
           return (
-            data.Name.toLowerCase().indexOf(this.Search.toLowerCase()) != -1
+            data.Name.toLowerCase().indexOf(this.Search.toLowerCase()) != -1,
+            data.Description.toLowerCase().indexOf(this.Search.toLowerCase()) !=
+              -1
           );
         }
       }).slice(0, 5);
+    },
+  },
+  methods: {
+    searChBox() {
+      this.Search = "";
     },
   },
   async mounted() {

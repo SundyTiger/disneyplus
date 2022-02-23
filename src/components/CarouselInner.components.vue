@@ -3,13 +3,13 @@
     <router-link
       :to="{
         name: 'Details',
-        params: { id: 'Hindi', title: data.Title },
+        params: { id: data.Language, title: data.Title },
       }"
       class="text-decoration-none"
     >
       <div class="card cardclr1 text-white">
         <div class="card-body d-flex">
-          <div class="mt-5 pt-4">
+          <div class="mt-5 pt-4 display">
             <div class="h4 fw-bold text-start card-title">{{ data.Name }}</div>
             <div class="card-subtitle text-white-50 text-start pt-2">
               <span>{{ data.Lenth }}</span
@@ -66,23 +66,32 @@ export default {
 @media screen and (max-width: 992px) {
   .responsive {
     width: 500;
-    max-width: 500px;
-    height: 150;
+    max-width: 400px;
+    height: 200px;
+  }
+  .display {
+    padding: 0;
   }
 }
-@media screen and (max-width: 692px) {
+@media screen and (max-width: 792px) {
   .responsive {
-    width: 400;
-    max-width: 500px;
-    height: auto;
+    width: 50;
+    max-width: 450px;
+    height: 190px;
+  }
+  .display {
+    display: none;
   }
 }
 /* On screens that are 600px wide or less, the background color is olive */
 @media screen and (max-width: 600px) {
   .responsive {
-    width: 200;
-    max-width: 300px;
-    height: auto;
+    width: 50;
+    max-width: 320px;
+    height: 170px;
+  }
+  .display {
+    display: none;
   }
 }
 </style>

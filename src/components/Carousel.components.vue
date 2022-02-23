@@ -11,8 +11,8 @@
             :key="i"
           />
         </div>
-        <PrevControl phref="#slider1" />
-        <NextControl nhref="#slider1" />
+        <PrevControl phref="#slider1" v-if="carArray.length > 1" />
+        <NextControl nhref="#slider1" v-if="carArray.length > 1" />
       </div>
     </div>
   </div>
